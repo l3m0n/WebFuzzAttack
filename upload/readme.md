@@ -1,11 +1,14 @@
 现在仅仅只是一些解析脚本拿到webshell吗？背后可能还存在ImageTragick、Ghostscript等一些处理导致问题，亦或者可以上传html导致xss，或者是pdf导致任意url跳转，或者是xls，docx导致xxe等等
 
 1、空后缀的文件 -> xss
+
 chrome下
+
 浏览器首先会根据服务端给出的content-type解析页面，而服务端一般不会给空后缀的文件设置content-type，或者设置为application/octet-stream
 其次浏览器会根据文件内容做简单的判断，如果文件的开头为<html>，则部分浏览器会将其解析为html
 部分浏览器还可能会设置默认的content-type，但大部分浏览器会选择不解析该文件。
 
+```
 <html>
 <head>
 </head>
@@ -18,6 +21,7 @@ chrome下
   </script>
   </body>
 </html>
+```
 
 https://paper.seebug.org/897/
 
